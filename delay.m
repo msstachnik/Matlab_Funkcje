@@ -1,35 +1,39 @@
-function X=delay(X,n)
+function Y=delay(X,n)
 %function create delay matrix from vector X, from vector 'n',
 %there there are delays of vector. length(n)=numbers of delays
 % 
 % X=delay(X,n)
 % 
-%exapmle:
-% x=[0.8147    0.9058    0.1270    0.9134    0.6324    0.0975    0.2785    0.5469    0.9575    0.9649];
-% delay_vector=[0 2 6];
-% y=delay(x',delay_vector)
-% 
-% y =
-% 
-%     0.8147    0.9058    0.1270    0.9134    0.6324    0.0975    0.2785    0.5469    0.9575    0.9649
-%          0         0          0.8147    0.9058    0.1270    0.9134    0.6324    0.0975    0.2785    0.5469
-%          0         0          0            0            0            0            0.8147    0.9058    0.1270    0.9134
+%  Last Update 2015-04-24 01:41 Mateusz Stachnik
+SizeOfX= size(X);
+if size(SizeOfX) <=2
+    
+    if SizeOfX(1) == 1 
 
+        for i=1:length(n)
+            X(i+1,:)=circshift(X(1,:),[0 n(i)]);
+            X(i+1,1:n(i))=0; 
+        end
+        Y=X(2:end,:);
+        
+    elseif  SizeOfX(2) == 1
+        
+        X = X';
+        for i=1:length(n)
+            X(i+1,:)=circshift(X(1,:),[0 n(i)]);
+            X(i+1,1:n(i))=0; 
+        end
+        X=X(2:end,:);
+        Y = X';   
+        
+    else
+        error('input should be one dimension array');
+    end
 
-for i=1:length(n)
-    X(i+1,:)=circshift(X(1,:),[0 n(i)]);
-    X(i+1,1:n(i))=0; 
+else
+    error('To bigg size of array');
 end
-X=X(2:end,:);
-end
 
-% X=X';
-% 
-% for i=1:length(n)
-%     X(:,i+1)=circshift(X(:,1),n(i));
-%     
-%     X(1:n(i),i+1)=0; 
-% end
-% X=X(:,2:end);
-% X=X';
-% end
+end
+%  2015-04-24 01:47 Revision notes: added exception handling and both
+%  transposition handling

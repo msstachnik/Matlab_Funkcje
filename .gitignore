@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+# Mablab files:
+
+*.asv
+
 # Folder config file
 Desktop.ini
 

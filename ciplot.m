@@ -1,5 +1,4 @@
-function ciplot(lower,upper,x,colour);
-     
+function ciplot(lower,upper,x,colour)    
 % ciplot(lower,upper)       
 % ciplot(lower,upper,x)
 % ciplot(lower,upper,x,colour)
